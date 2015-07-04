@@ -34,5 +34,9 @@ namespace Mob.Core.Extensions
             int output;
             return int.TryParse(str, out output);
         }
+
+       
+
+       
     }
 }
