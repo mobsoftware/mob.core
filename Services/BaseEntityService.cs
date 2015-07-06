@@ -30,7 +30,7 @@ namespace Mob.Core.Services
 
         public void Update(T entity)
         {
-            if(entity.Id == 0)
+            if(entity.Id != 0)
                 _repository.Update(entity);
         }
 
