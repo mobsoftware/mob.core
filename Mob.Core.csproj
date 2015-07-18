@@ -55,6 +55,7 @@
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\..\Websites\Testing\nopCommerce_3.60_Source\packages\Microsoft.AspNet.WebPages.3.1.0\lib\net45\System.Web.Helpers.dll</HintPath>
@@ -100,8 +101,10 @@
     <Compile Include="Data\MobRepository.cs" />
     <Compile Include="Domain\BaseMobEntity.cs" />
     <Compile Include="Domain\BaseMobPictureEntity.cs" />
+    <Compile Include="Extensions\JsonResultExtensions.cs" />
     <Compile Include="Extensions\UtilityExtensions.cs" />
     <Compile Include="Helpers\EnumHelpers.cs" />
+    <Compile Include="Helpers\JsonpResult.cs" />
     <Compile Include="ISortableSupported.cs" />
     <Compile Include="OAuthBaseExtensions.cs" />
     <Compile Include="OAuthBase.cs" />
