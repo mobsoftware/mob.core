@@ -105,6 +105,7 @@
     <Compile Include="Extensions\UtilityExtensions.cs" />
     <Compile Include="Helpers\EnumHelpers.cs" />
     <Compile Include="Helpers\JsonpResult.cs" />
+    <Compile Include="ISoftDeletable.cs" />
     <Compile Include="ISortableSupported.cs" />
     <Compile Include="OAuthBaseExtensions.cs" />
     <Compile Include="OAuthBase.cs" />
