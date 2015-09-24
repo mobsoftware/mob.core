@@ -21,6 +21,13 @@ namespace Mob.Core.Services
         where T : BaseMobEntity
         where P : BaseMobPictureEntity
     {
+       
+
+        protected IMobRepository<P> PictureRepository
+        {
+            get { return _pictureRepository; }
+        } 
+
 
         private readonly IMobRepository<T> _repository;
         private readonly IMobRepository<P> _pictureRepository;
@@ -38,8 +45,11 @@ namespace Mob.Core.Services
         }
 
         public BaseEntityWithPictureService(IMobRepository<T> repository, IMobRepository<P> pictureRepository, IPictureService pictureService, IWorkContext workContext, IUrlRecordService urlRecordService)
-            : this(repository, pictureRepository, pictureService)
+            : base(repository, workContext, urlRecordService)
         {
+            _repository = repository;
+            _pictureRepository = pictureRepository;
+            _pictureService = pictureService;
             _workContext = workContext;
             _urlRecordService = urlRecordService;
         }
@@ -52,8 +62,6 @@ namespace Mob.Core.Services
         {
             base.Insert(entity);
 
-            if (entity is ISlugSupported && entity is INameSupported)
-                InsertUrlRecord(entity);
 
         }
 
@@ -62,31 +70,12 @@ namespace Mob.Core.Services
 
             base.Update(entity);
 
-            if (entity is ISlugSupported && entity is INameSupported)
-            {
-                var currentSlug = _urlRecordService.GetActiveSlug(entity.Id, typeof(T).Name, _workContext.WorkingLanguage.Id);
-
-                if (!string.IsNullOrEmpty(currentSlug))
-                    UpdateUrlRecord(entity, currentSlug);
-                else
-                    InsertUrlRecord(entity);
-            }
 
 
         }
         public new void Delete(T entity)
         {
-            if (entity is ISlugSupported && entity is INameSupported)
-            {
-                // TODO: Need Nop UrlRecordService.GetByEntityId(entityId, entityName) method
-                var currentSlug = _urlRecordService.GetActiveSlug(entity.Id, typeof(T).Name, _workContext.WorkingLanguage.Id);
-                if (!string.IsNullOrEmpty(currentSlug))
-                {
-                    var urlRecord = _urlRecordService.GetBySlug(currentSlug);
-                    _urlRecordService.DeleteUrlRecord(urlRecord);
-                }
-            }
-
+           
            base.Delete(entity);
 
         }
@@ -182,35 +171,7 @@ namespace Mob.Core.Services
         #endregion
 
 
-        #region Helper Methods
-
-        private void InsertUrlRecord(T entity)
-        {
-            var namedEntity = (INameSupported)entity;
-            var urlRecord = new UrlRecord() {
-                EntityId = entity.Id,
-                EntityName = typeof(T).Name,
-                IsActive = true,
-                LanguageId = _workContext.WorkingLanguage.Id,
-                Slug = Nop.Services.Seo.SeoExtensions.GetSeName(namedEntity.Name, true, false)
-            };
-
-            _urlRecordService.InsertUrlRecord(urlRecord);
-        }
-
-        private void UpdateUrlRecord(T entity, string currentSlug)
-        {
-            var urlRecord = _urlRecordService.GetBySlug(currentSlug);
-            var namedEntity = (INameSupported)entity;
-            var newSlug = Nop.Services.Seo.SeoExtensions.GetSeName(namedEntity.Name, true, false);
-
-            urlRecord.EntityName = typeof(T).Name;
-            urlRecord.LanguageId = _workContext.WorkingLanguage.Id;
-            urlRecord.Slug = newSlug;
-
-            _urlRecordService.UpdateUrlRecord(urlRecord);
-        }
-        #endregion
+      
 
 
 

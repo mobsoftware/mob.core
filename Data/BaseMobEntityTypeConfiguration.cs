@@ -17,7 +17,7 @@ namespace Mob.Core.Data
             ToTable(typeof (T).Name);
             HasKey(x => x.Id);
             Property(x => x.DateCreated).HasColumnType("datetime2");
-            Property(x => x.DateUpdated).HasColumnType("datetime2");
+            Property(x => x.DateUpdated).HasColumnType("datetime2").IsOptional();
         } 
     }
 }
