@@ -14,6 +14,10 @@ namespace Mob.Core.Data
 {
     public class MobDbContext : DbContext, IDbContext
     {
+        public MobDbContext()
+        {
+            
+        }
         public MobDbContext(string nameOrConnectionString) : base(nameOrConnectionString)
         {
             

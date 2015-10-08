@@ -107,6 +107,8 @@
     <Compile Include="Helpers\JsonpResult.cs" />
     <Compile Include="ISoftDeletable.cs" />
     <Compile Include="ISortableSupported.cs" />
+    <Compile Include="Migrations\MobMigration.cs" />
+    <Compile Include="Migrations\MobMigrationConfiguration.cs" />
     <Compile Include="OAuthBaseExtensions.cs" />
     <Compile Include="OAuthBase.cs" />
     <Compile Include="PictureUtility.cs" />

@@ -5,3 +5,5 @@
 /obj/Debug/*.cs
 /obj/Debug/*.txt
 /bin/Debug
+/obj/Release
+/bin/Release
