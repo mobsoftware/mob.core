@@ -182,6 +182,10 @@ namespace Mob.Core.Services
             var newSlug = Nop.Services.Seo.SeoExtensions.GetSeName(namedEntity.Name, true, false);
 
             newSlug = ValidateSeName(entity, newSlug, namedEntity.Name);
+
+            if (newSlug == currentSlug)
+                //no need to perform any update as the name hasn't been modified
+                return;
             urlRecord.EntityName = typeof(T).Name;
             urlRecord.LanguageId = _workContext.WorkingLanguage.Id;
             urlRecord.Slug = newSlug;
