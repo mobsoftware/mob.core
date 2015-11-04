@@ -16,7 +16,9 @@ namespace Mob.Core.Services
         void Update(T entity);
         
         T GetById(int id);
-        
+
+        T GetBySeName(string SeName);
+
         List<T> GetAll();
         
         List<T> GetAll(string Term, int Count = 15, int Page = 1);
