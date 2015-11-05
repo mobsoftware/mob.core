@@ -12,6 +12,9 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using Autofac.Core;
+using Autofac.Integration.Mvc;
+using Mob.Core.UI;
+using Nop.Web.Framework.UI;
 
 namespace Mob.Core
 {
@@ -30,7 +33,7 @@ namespace Mob.Core
             builder.RegisterGeneric(typeof(BaseEntityService<>)).As(typeof(IBaseEntityService<>)).InstancePerLifetimeScope();
             builder.RegisterGeneric(typeof(BaseEntityWithPictureService<,>)).As(typeof(IBaseEntityWithPictureService<,>)).InstancePerLifetimeScope();
 
-        
+            builder.RegisterType<MobPageHeadBuilder>().As<MobPageHeadBuilder>().InstancePerRequest();
 
             //register all the implemented services in various mob plugins
             builder.RegisterAssemblyTypes(asm).AsClosedTypesOf(typeof(BaseEntityService<>))
