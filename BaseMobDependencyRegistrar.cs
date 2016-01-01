@@ -15,6 +15,7 @@ using Autofac.Core;
 using Autofac.Integration.Mvc;
 using Mob.Core.UI;
 using Nop.Web.Framework.UI;
+using Nop.Core.Configuration;
 
 namespace Mob.Core
 {
@@ -23,7 +24,7 @@ namespace Mob.Core
         //the context name
         public abstract string ContextName { get; }
 
-        public virtual void Register(ContainerBuilder builder, ITypeFinder typeFinder)
+        public virtual void Register(ContainerBuilder builder, ITypeFinder typeFinder, NopConfig config)
         {
 
 
