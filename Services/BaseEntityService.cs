@@ -87,9 +87,7 @@ namespace Mob.Core.Services
 
         public T GetBySeName(string SeName)
         {
-            //TODO: There should be a method to retrieve url records with entity type and slug
-            var urlRecords = _urlRecordService.GetAllUrlRecords(SeName);
-            var entityUrlRecord = urlRecords.FirstOrDefault(x => x.EntityName == typeof(T).Name);
+            var entityUrlRecord = _urlRecordService.GetBySlug(SeName);
 
             if (entityUrlRecord == null)
                 return null;
