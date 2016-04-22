@@ -144,8 +144,10 @@ namespace Mob.Core.Services
         public Picture GetFirstPicture(int entityId)
         {
             var ep = GetFirstEntityPicture(entityId);
-            
-            return _pictureService.GetPictureById(ep.PictureId);
+            if (ep != null)
+                return _pictureService.GetPictureById(ep.PictureId);
+
+            return null;
         }
 
         #endregion
