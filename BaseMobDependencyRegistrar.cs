@@ -48,7 +48,7 @@ namespace Mob.Core
             //register all the repositories
             builder.RegisterGeneric(typeof(MobRepository<>)).As(typeof(IMobRepository<>))
                 .WithParameter(ResolvedParameter.ForNamed<IDbContext>(ContextName))
-                        .InstancePerRequest();
+                        .InstancePerLifetimeScope();
 
         }
 
