@@ -114,6 +114,7 @@
     <Compile Include="ObjectContextExtensions.cs" />
     <Compile Include="Services\BaseEntityService.cs" />
     <Compile Include="Services\BaseEntityWithPictureService.cs" />
+    <Compile Include="Services\BaseMessageService.cs" />
     <Compile Include="Services\IBaseEntityService.cs" />
     <Compile Include="Services\IBaseEntityWithPictureService.cs" />
     <Compile Include="SimpleEncryptor.cs" />
