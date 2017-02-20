@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 using Mob.Core.Data;
@@ -80,6 +81,13 @@ namespace Mob.Core.Services
             }
         }
 
+        public void Delete(Expression<Func<T, bool>> @where)
+        {
+            var entities = _repository.Table.Where(where).ToList();
+            foreach(var entity in entities)
+                Delete(entity);
+        }
+
         public T GetById(int id)
         {
             return _repository.Table.FirstOrDefault(m => m.Id == id);
@@ -103,6 +111,28 @@ namespace Mob.Core.Services
         }
 
         public abstract List<T> GetAll(string Term, int Count = 15, int Page = 1);
+
+        public T First(Expression<Func<T, bool>> @where)
+        {
+            return _repository.Table.First(where);
+        }
+
+        public T FirstOrDefault(Expression<Func<T, bool>> @where)
+        {
+            return _repository.Table.FirstOrDefault(where);
+        }
+
+        public int Count(Expression<Func<T, bool>> @where = null)
+        {
+            if (where == null)
+                where = x => true;
+            return _repository.Table.Count(where);
+        }
+
+        public IQueryable<T> Get(Expression<Func<T, bool>> @where)
+        {
+            return _repository.Table.Where(where);
+        }
 
         #region Helper Methods
 
